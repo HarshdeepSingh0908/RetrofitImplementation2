@@ -1,4 +1,4 @@
-package com.harsh.retrofitimplementation2
+package com.harsh.retrofitimplementation2.dataclasses
 
 
 import com.google.gson.annotations.SerializedName

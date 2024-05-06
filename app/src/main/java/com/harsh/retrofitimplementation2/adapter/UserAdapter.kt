@@ -1,4 +1,4 @@
-package com.harsh.retrofitimplementation2
+package com.harsh.retrofitimplementation2.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,8 +6,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.harsh.retrofitimplementation2.dataclasses.GetApiResponseItem
+import com.harsh.retrofitimplementation2.R
 
-class UserAdapter(private val dataList: List<GetApiResponseItem>) :
+class UserAdapter(val dataList: List<GetApiResponseItem> ?= null) :
     RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -24,9 +26,9 @@ class UserAdapter(private val dataList: List<GetApiResponseItem>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentItem = dataList[position]
-        var gender = currentItem.gender
-        var status = currentItem.status
+        val currentItem = dataList?.get(position)
+        var gender = currentItem?.gender
+        var status = currentItem?.status
         if (status=="active"){
             holder.statusImageView.setImageResource(R.drawable.green_circle)
         } else if (status=="inactive"){
@@ -38,12 +40,12 @@ class UserAdapter(private val dataList: List<GetApiResponseItem>) :
         else if (gender == "female"){
             holder.genderImageView.setImageResource(R.drawable.femenine)
         }
-        holder.nameTextView.text = "Name: "+currentItem.name
-        holder.emailTextView.text ="Email: "+currentItem.email
+        holder.nameTextView.text = "Name: "+currentItem?.name
+        holder.emailTextView.text ="Email: "+currentItem?.email
 
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return dataList?.size!!
     }
 }
